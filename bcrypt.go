@@ -30,3 +30,13 @@ func CompareBcryptHashAndPassword(hashedPassword, password string) error {
 
 	return bcrypt.CompareHashAndPassword(buf.Bytes(), buf2.Bytes())
 }
+
+func PasswordHash(password string) string {
+	hash, _ := GenerateBcryptFromPassword(password)
+	return hash
+}
+
+func PasswordVerify(password, hash string) bool {
+	err := CompareBcryptHashAndPassword(hash, password)
+	return err == nil
+}
