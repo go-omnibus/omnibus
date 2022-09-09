@@ -28,13 +28,3 @@ func PasswordVerify(password, hash string) bool {
 	err := CompareBcryptHashAndPassword(hash, password)
 	return err == nil
 }
-
-func PasswordHash(password string) string {
-	hash, _ := GenerateBcryptFromPassword(password)
-	return hash
-}
-
-func PasswordVerify(password, hash string) bool {
-	err := CompareBcryptHashAndPassword(hash, password)
-	return err == nil
-}
