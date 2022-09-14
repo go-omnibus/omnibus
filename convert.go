@@ -66,3 +66,31 @@ func ToString(value interface{}) (string, error) {
 		return "", ErrConvertType
 	}
 }
+
+func DefiniteInt64(value interface{}) int64 {
+	i, _ := ToInt64(value)
+	return i
+}
+
+func ToInt64(value interface{}) (int64, error) {
+	v := reflect.ValueOf(value)
+
+	switch value.(type) {
+	case nil:
+		return 0, nil
+	case int, int8, int16, int32, int64:
+		return v.Int(), nil
+	case uint, uint8, uint16, uint32, uint64:
+		return int64(v.Uint()), nil
+	case float32, float64:
+		return int64(v.Float()), nil
+	case string:
+		return strconv.ParseInt(v.String(), 0, 64)
+	case time.Duration:
+		return int64(value.(time.Duration)), nil
+	case json.Number:
+		return value.(json.Number).Int64()
+	default:
+		return 0, ErrConvertType
+	}
+}
