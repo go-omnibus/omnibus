@@ -94,3 +94,35 @@ func ToInt64(value interface{}) (int64, error) {
 		return 0, ErrConvertType
 	}
 }
+
+func DefiniteInt(value interface{}) int {
+	i, _ := ToInt(value)
+	return i
+}
+
+func ToInt(value interface{}) (int, error) {
+	v := reflect.ValueOf(value)
+
+	switch value.(type) {
+	case nil:
+		return 0, nil
+	case int, int8, int16, int32, int64:
+		return int(v.Int()), nil
+	case uint, uint8, uint16, uint32, uint64:
+		return int(v.Uint()), nil
+	case float32, float64:
+		return int(v.Float()), nil
+	case string:
+		return strconv.Atoi(v.String())
+	case time.Duration:
+		return int(value.(time.Duration)), nil
+	case json.Number:
+		i, err := value.(json.Number).Int64()
+		if err != nil {
+			return 0, err
+		}
+		return int(i), nil
+	default:
+		return 0, ErrConvertType
+	}
+}
