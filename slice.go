@@ -51,10 +51,10 @@ func StringsToInt64s(ss []string) []int64 {
 func StringArrayUnique(arr []string) []string {
 	size := len(arr)
 	ret := make([]string, 0, size)
-	temp := map[string]struct{}{}
+	memo := make(map[string]bool)
 	for i := 0; i < size; i++ {
-		if _, ok := temp[arr[i]]; ok != true {
-			temp[arr[i]] = struct{}{}
+		if _, ok := memo[arr[i]]; ok != true {
+			memo[arr[i]] = true
 			ret = append(ret, arr[i])
 		}
 	}
@@ -64,10 +64,10 @@ func StringArrayUnique(arr []string) []string {
 func Int64ArrayUnique(arr []int64) []int64 {
 	size := len(arr)
 	ret := make([]int64, 0, size)
-	temp := map[int64]struct{}{}
+	memo := make(map[int64]bool)
 	for i := 0; i < size; i++ {
-		if _, ok := temp[arr[i]]; ok != true {
-			temp[arr[i]] = struct{}{}
+		if _, ok := memo[arr[i]]; ok != true {
+			memo[arr[i]] = true
 			ret = append(ret, arr[i])
 		}
 	}
@@ -77,10 +77,10 @@ func Int64ArrayUnique(arr []int64) []int64 {
 func IntArrayUnique(arr []int) []int {
 	size := len(arr)
 	ret := make([]int, 0, size)
-	temp := map[int]struct{}{}
+	memo := make(map[int]bool)
 	for i := 0; i < size; i++ {
-		if _, ok := temp[arr[i]]; ok != true {
-			temp[arr[i]] = struct{}{}
+		if _, ok := memo[arr[i]]; ok != true {
+			memo[arr[i]] = true
 			ret = append(ret, arr[i])
 		}
 	}
