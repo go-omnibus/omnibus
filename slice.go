@@ -47,3 +47,42 @@ func StringsToInt64s(ss []string) []int64 {
 	}
 	return ints
 }
+
+func StringArrayUnique(arr []string) []string {
+	size := len(arr)
+	ret := make([]string, 0, size)
+	temp := map[string]struct{}{}
+	for i := 0; i < size; i++ {
+		if _, ok := temp[arr[i]]; ok != true {
+			temp[arr[i]] = struct{}{}
+			ret = append(ret, arr[i])
+		}
+	}
+	return ret
+}
+
+func Int64ArrayUnique(arr []int64) []int64 {
+	size := len(arr)
+	ret := make([]int64, 0, size)
+	temp := map[int64]struct{}{}
+	for i := 0; i < size; i++ {
+		if _, ok := temp[arr[i]]; ok != true {
+			temp[arr[i]] = struct{}{}
+			ret = append(ret, arr[i])
+		}
+	}
+	return ret
+}
+
+func IntArrayUnique(arr []int) []int {
+	size := len(arr)
+	ret := make([]int, 0, size)
+	temp := map[int]struct{}{}
+	for i := 0; i < size; i++ {
+		if _, ok := temp[arr[i]]; ok != true {
+			temp[arr[i]] = struct{}{}
+			ret = append(ret, arr[i])
+		}
+	}
+	return ret
+}
